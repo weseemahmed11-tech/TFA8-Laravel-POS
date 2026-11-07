@@ -36,7 +36,8 @@ php artisan db:seed
 php artisan serve
 ```
 
-
+Email: jordan.lee@example.com
+Password: password
 
 Then open the local URL shown by Artisan.
 
