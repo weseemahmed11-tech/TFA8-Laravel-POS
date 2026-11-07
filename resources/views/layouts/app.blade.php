@@ -18,6 +18,10 @@
         .nav-links { display: flex; flex-wrap: wrap; gap: 8px; }
         .nav-links a { padding: 9px 13px; border: 1px solid transparent; border-radius: 8px; color: var(--silver); font-size: .95rem; text-decoration: none; transition: color .2s ease, background .2s ease, border-color .2s ease; }
         .nav-links a:hover, .nav-links a.active { color: #fff5d6; background: rgba(227, 184, 95, .12); border-color: rgba(227, 184, 95, .3); }
+        .nav-logout-form { margin: 0; }
+        .nav-logout { padding: 9px 13px; border: 1px solid rgba(255, 154, 145, .72); border-radius: 8px; color: #fff; background: linear-gradient(135deg, #b42318, #8f1d18); font: inherit; font-size: .95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 0, 0, .2), inset 0 1px 1px rgba(255, 255, 255, .16); transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+        .nav-logout:hover { background: linear-gradient(135deg, #dc2626, #7f1d1d); border-color: #ffb4a9; box-shadow: 0 6px 16px rgba(0, 0, 0, .28), inset 0 1px 1px rgba(255, 255, 255, .12); transform: translateY(-1px); }
+        .nav-logout:focus-visible { outline: 3px solid #f5d889; outline-offset: 3px; }
         main { padding: 64px 0 82px; }
         .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
         h1, h2, h3 { margin: 0 0 14px; line-height: 1.15; }
@@ -55,6 +59,9 @@
         .page-intro { max-width: 680px; margin-bottom: 36px; }
         .button.secondary { margin-left: 8px; color: var(--silver); background: transparent; border-color: var(--line); box-shadow: none; }
         .text-action { color: #f5d889; font-size: .86rem; font-weight: 800; text-decoration: none; }
+        .delete-action { display: inline-block; padding: 6px 10px; border: 1px solid #8f1d18; border-radius: 6px; color: #fff; background: #b42318; font: inherit; font-size: .78rem; font-weight: 800; line-height: 1.2; cursor: pointer; box-shadow: 0 3px 8px rgba(0, 0, 0, .2), inset 0 1px 1px rgba(255, 255, 255, .18); transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+        .delete-action:hover { background: #7f1d1d; box-shadow: 0 5px 12px rgba(0, 0, 0, .28), inset 0 1px 1px rgba(255, 255, 255, .12); transform: translateY(-1px); }
+        .delete-action:focus-visible { outline: 3px solid #f5d889; outline-offset: 2px; }
         .form-card { max-width: 760px; padding: 30px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, rgba(29, 43, 66, .96), rgba(17, 26, 43, .98)); box-shadow: 0 14px 30px rgba(0, 0, 0, .2); }
         .record-form { display: grid; gap: 24px; }
         .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
@@ -87,6 +94,15 @@
                 <a class="{{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
                 <a class="{{ request()->routeIs('customers.*') ? 'active' : '' }}" href="{{ route('customers.index') }}">Customers</a>
                 <a class="{{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">Users</a>
+                @auth
+                    <form class="nav-logout-form" method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="nav-logout" type="submit">Logout</button>
+                    </form>
+                @else
+                    <a class="{{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
+                    <a class="{{ request()->routeIs('register') ? 'active' : '' }}" href="{{ route('register') }}">Register</a>
+                @endauth
             </nav>
         </div>
     </header>

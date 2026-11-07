@@ -8,7 +8,7 @@
             <article class="card">
                 <div class="card-header"><div><h3><a href="{{ route('customers.show', $customer) }}">{{ $customer->full_name }}</a></h3><div class="record-id">Customer #{{ $customer->id }}</div></div><a class="text-action" href="{{ route('customers.edit', $customer) }}">Edit</a></div>
                 <dl class="details"><div><dt>Email</dt><dd>{{ $customer->email }}</dd></div><div><dt>Phone</dt><dd>{{ $customer->phone }}</dd></div></dl>
-                <form method="POST" action="{{ route('customers.destroy', $customer) }}" class="form-actions">@csrf @method('DELETE')<button class="text-action" type="submit">Delete</button></form>
+                <form method="POST" action="{{ route('customers.destroy', $customer) }}" class="form-actions">@csrf @method('DELETE')<button class="delete-action" type="submit">Delete</button></form>
             </article>
         @endforeach
     </div>
